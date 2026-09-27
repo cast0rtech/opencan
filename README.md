@@ -18,6 +18,14 @@
 
 ---
 
+## 🌟 Key Highlights of this Setup
+
+- **SELinux & Permission Resilience:** The `:Z` flags in `docker-compose.yml` make the container work seamlessly out of the box on Red Hat Enterprise Linux, Rocky Linux, and Fedora without permission errors on the volumes.
+- **Resource Constraints:** Strict CPU and memory limits (512M cap) ensure the container remains lightweight on low-power devices such as the Raspberry Pi 3/4.
+- **Independent Device Architecture:** Each of the 5 inverters has its own definition with manufacturer-specific communication requirements (e.g., SolarEdge's common port 1502, SMA's Unit ID 3, and Victron's multi-unit dispatching across 100 and 228). If one device goes offline, the remaining four will continue polling without delay.
+
+---
+
 ## 🛠 Requisitos Previos
 
 ### 1. Inversor Fronius
