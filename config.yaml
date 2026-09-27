@@ -1,0 +1,66 @@
+app_name: "SolarHub Industrial Gateway"
+storage:
+  database_url: "sqlite+aiosqlite:///./data/solar_metrics.db"
+  buffer_flush_seconds: 60
+  retention_days: 30
+
+inverters:
+  # 1. Fronius Primo/Symo/GEN24 (SunSpec Model 101/103)
+  - id: "inv_fronius_symo"
+    name: "Fronius Symo 10.0-3-M"
+    driver: "fronius"
+    host: "192.168.1.101"
+    port: 502
+    unit_id: 1
+    timeout: 3.0
+    poll_interval: 2.0
+    base_address: 40069
+    enabled: true
+
+  # 2. Huawei SUN2000 con SDongleA-05
+  - id: "inv_huawei_sun2000"
+    name: "Huawei SUN2000-10KTL-M1"
+    driver: "huawei"
+    host: "192.168.1.102"
+    port: 502
+    unit_id: 1
+    timeout: 3.0
+    poll_interval: 3.0
+    base_address: 32066
+    enabled: true
+
+  # 3. SMA Sunny Tripower (Modbus nativo / Speedwire)
+  - id: "inv_sma_tripower"
+    name: "SMA Sunny Tripower 8.0"
+    driver: "sma"
+    host: "192.168.1.103"
+    port: 502
+    unit_id: 3
+    timeout: 3.0
+    poll_interval: 2.5
+    base_address: 30775
+    enabled: true
+
+  # 4. SolarEdge HD-Wave (SunSpec Model 101, puerto 1502/502)
+  - id: "inv_solaredge_hdwave"
+    name: "SolarEdge SE5000H HD-Wave"
+    driver: "solaredge"
+    host: "192.168.1.104"
+    port: 1502
+    unit_id: 1
+    timeout: 4.0
+    poll_interval: 2.0
+    base_address: 40069
+    enabled: true
+
+  # 5. Victron Cerbo GX (Venus OS - MultiPlus II + SmartSolar)
+  - id: "gw_victron_cerbo"
+    name: "Victron Cerbo GX ESS"
+    driver: "victron"
+    host: "192.168.1.105"
+    port: 502
+    unit_id: 100  # 100 = Systemcalc (Balance global), 228 = VE.Bus
+    timeout: 2.5
+    poll_interval: 1.5
+    base_address: 820
+    enabled: true

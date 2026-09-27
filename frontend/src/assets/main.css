@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes flow-forward {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes flow-backward {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 24;
+  }
+}
+
+.energy-line-forward {
+  stroke-dasharray: 6 6;
+  animation: flow-forward 1s linear infinite;
+}
+
+.energy-line-backward {
+  stroke-dasharray: 6 6;
+  animation: flow-backward 1s linear infinite;
+}
+
+.touch-action-manipulation {
+  touch-action: manipulation;
+  user-select: none;
+}

@@ -1,0 +1,38 @@
+services:
+  solarhub-ems:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: solarhub-ems:latest
+    container_name: solarhub-ems
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    
+    # En pasarelas industriales con subredes locales complejas, se puede usar host mode:
+    # network_mode: "host"
+
+    environment:
+      - SOLAR_DEBUG=false
+      - SOLAR_STORAGE__DATABASE_URL=sqlite+aiosqlite:////app/data/solar_metrics.db
+      - SOLAR_STORAGE__BUFFER_FLUSH_SECONDS=60
+      - SOLAR_STORAGE__RETENTION_DAYS=30
+
+    volumes:
+      - ./data:/app/data:Z
+      - ./config.yaml:/app/config.yaml:ro,Z
+
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 384M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
